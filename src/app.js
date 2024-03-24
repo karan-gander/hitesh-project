@@ -13,4 +13,9 @@ app.use(express.urlencoded({extended:true,limit:"20kb"}))
 app.use(express.static("public"))
 app.use(cookieParser())
 
+// Routes calling 
+import userSignUp from "./routes/user.routes.js"
+app.use("/api/v1/user",userSignUp)
+
+
 export {app}
