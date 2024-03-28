@@ -5,7 +5,7 @@ const asyncHandler = (fn) => async (req,res,next)=>{
         
     } catch (error) {
         console.log(error.message)
-        res.send(error.code||500).json({
+        res.status(error.code||500).json({
             success:false,
             message:error.message
         })

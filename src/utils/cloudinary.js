@@ -1,4 +1,4 @@
-import {ApiError} from "./ApiError"
+import {ApiError} from "./ApiError.js"
 import {v2 as cloudinary} from 'cloudinary';
 import fs, { unlinkSync } from "fs"
 cloudinary.config({ 
@@ -28,4 +28,4 @@ const fileUploadOnCloud = async(localPath) =>{
 
 }
           
-export {cloudinary}
+export {fileUploadOnCloud}
