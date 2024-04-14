@@ -4,6 +4,8 @@ import {userLogin} from "../controllers/userLogin.js"
 import {logout} from "../controllers/userLogout.js"
 import {refreshAccessToken} from "../controllers/refreshToken.js"
 import { changePassword } from "../controllers/changePassword.js";
+import {updateUserDetails} from "../controllers/updateUserDetails.js"
+import {getCurruntUser} from "../controllers/curruntUser.js"
 import {verifyJWT} from "../middleware/auth.js"
 import {upload} from "../middleware/multer.js"
 
@@ -15,6 +17,7 @@ router.route("/login").post(userLogin)
 router.route("/logout").post(verifyJWT,logout)
 router.route("/refresh-token").post(refreshAccessToken)
 router.route("change-password").post(verifyJWT,changePassword)
-router.route("currunt-user").post(verifyJWT,)
+router.route("currunt-user").post(verifyJWT,getCurruntUser)
+router.route("update-account").post(verifyJWT,updateUserDetails)
 
 export default router

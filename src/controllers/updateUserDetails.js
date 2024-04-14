@@ -1,8 +1,8 @@
 import { User } from "../models/users.model";
 import { ApiError } from "../utils/ApiError";
 import { asyncHandler } from "../utils/asyncHandler";
-
-const updateUserDetails = asyncHandler(async (req,res)=>{
+import {ApiResponse} from "../utils/ApiResponse"
+ export const updateUserDetails = asyncHandler(async (req,res)=>{
     
     const {fullName,email} = req.body;
 
@@ -14,13 +14,18 @@ const updateUserDetails = asyncHandler(async (req,res)=>{
     const user = await User.findByIdAndUpdate(
                 req.user?._id,
                 {
-                    email,
-                    fullName
+                    $set:{
+                        email,
+                        fullName
+                    }
                 },
                 {
                     new:true
                 }
 
     ).select("-password")
+
+    res.status(200).json(new ApiResponse(200,user,"Account Updated Successfully"))
+
 
 })
