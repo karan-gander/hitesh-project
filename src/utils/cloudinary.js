@@ -15,7 +15,8 @@ const fileUploadOnCloud = async(localPath) =>{
         if(!localPath) return  ApiError(500,"Could not find the file path")
 
         const response = await cloudinary.uploader.upload(localPath,{
-            resource_type:"auto"           
+            resource_type:"raw",
+            
         })
         console.log(`file uploaded succesfully ${response.url}`)
         return response

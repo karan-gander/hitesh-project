@@ -26,7 +26,7 @@ const userSchema = new mongoose.Schema({
     },
     avtar:{
         type:String,
-        required:true
+        required:false
     },
     watchHistory:{
         type:Schema.Types.ObjectId,
@@ -38,11 +38,17 @@ const userSchema = new mongoose.Schema({
 },{timestamps:true})
 
 userSchema.pre("save",async function(next){
-    if(!this.isModified(this.password)) return next()
-    
-     this.password = await bcrypt.hash(this.password,8)
-     next()
+   try {
+     if(!this.isModified("password")) return next()
+     
+      this.password = await bcrypt.hash(this.password,8)
+      next()
+   } catch (error) {
+    console.log(error)
+   }
 })
+
+
 
 userSchema.methods.isPasswordCorrect  = async function(password){
     
@@ -68,13 +74,14 @@ userSchema.methods.generateAccessToken = async function(){
 
 
 userSchema.methods.generateRefreshToken = async function(){
+    console.log("Hi i am refresh")
     return jwt.sign(
-        {
+        {   
             _id:this._id
         },
         process.env.REFRESH_TOKEN_SECRET,
         {
-            expiresIn:REFRESH_TOKEN_EXPIRY
+            expiresIn:process.env.REFRESH_TOKEN_EXPIRY
         }
     )
 
