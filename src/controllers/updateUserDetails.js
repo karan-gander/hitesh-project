@@ -1,7 +1,7 @@
-import { User } from "../models/users.model";
-import { ApiError } from "../utils/ApiError";
-import { asyncHandler } from "../utils/asyncHandler";
-import {ApiResponse} from "../utils/ApiResponse"
+import { User } from "../models/users.model.js";
+import { ApiError } from "../utils/ApiError.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
+import {ApiResponse} from "../utils/ApiResponse.js"
  export const updateUserDetails = asyncHandler(async (req,res)=>{
     
     const {fullName,email} = req.body;
